@@ -90,6 +90,7 @@ class Audio {
     if (this.#pause) {
       this.AudioElem.pause();
     } else {
+      
       this.AudioElem.play();
     }
   }

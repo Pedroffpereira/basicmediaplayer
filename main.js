@@ -94,21 +94,36 @@ function loadMusicinfo() {
 }
 loadMusicinfo();
 btPlay.addEventListener("click", function () {
+  btPause.classList.remove("hidden")
+  musicImgElem.classList.remove('paused')
+  btPlay.classList.add("hidden")
   audioplayer.pauseControler();
   clock();
 });
 
 btPause.addEventListener("click", function () {
+  btPause.classList.add("hidden")
+  btPlay.classList.remove("hidden")
+  
+  musicImgElem.classList.add('paused')
   audioplayer.pauseControler();
   clock();
 });
 
 btSoundOff.addEventListener("click", function () {
-  track(soundVolumeContainer, 0);
+  btSoundOff.classList.add("hidden")
+  
+  btSoundOn.classList.remove("hidden")
+  trackSound(soundVolumeContainer, 0);
 });
 
+audioplayer.audioController(trackSound(soundVolumeContainer, soundVolumeContainer.offsetWidth));
 btSoundOn.addEventListener("click", function () {
-  track(soundVolumeContainer, 100);
+  
+  btSoundOff.classList.remove("hidden")
+  
+  btSoundOn.classList.add("hidden")
+  trackSound(soundVolumeContainer, soundVolumeContainer.offsetWidth);
 });
 btPrevious.addEventListener("click", function () {
   audioplayer.prev();
@@ -143,6 +158,7 @@ function clock() {
       (audioplayer.Time / audioelem.duration) * 100 + "%";
   }
 }
+
 soundVolumeContainer.addEventListener("click", function (event) {
   audioplayer.audioController(trackSound(this, event.offsetX));
 });
